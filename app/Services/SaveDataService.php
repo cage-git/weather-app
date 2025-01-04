@@ -8,7 +8,8 @@ class SaveDataService
 {
     public function saveData($data)
     {
-        try {
+        try 
+        {
             
             $city = City::updateOrCreate(
                 ['uid' => $data['id']],
@@ -39,29 +40,28 @@ class SaveDataService
                 ]
             );
 
-            $city->winds()->updateOrCreate(
-                ['city_id' => $city->id], 
-                [
-                    'speed' => $data['wind']['speed'],
-                    'deg' => $data['wind']['deg'],
-                    'gust' => $data['wind']['gust'],
-                ]
-            );
+            $city->winds()->updateOrCreate([
+                'city_id' => $city->id,
+                'speed' => $data['wind']['speed'],
+                'deg' => $data['wind']['deg'],
+                // 'gust' => $data['wind']['gust'],
+                'gust' => $data['wind']['gust'] ?? 0
+            ]);
 
-            $city->locations()->updateOrCreate(
-                ['city_id' => $city->id],
-                [
-                    'latitude' => $data['coord']['lat'],
-                    'longitude' => $data['coord']['lon'],
-                    'country' => $data['sys']['country'],
-                    'sunrise' => $data['sys']['sunrise'],
-                    'sunset' => $data['sys']['sunset'],
-                    'city' => $data['name'],
-                ]
-            );
+            $city->locations()->updateOrCreate([
+                'city_id' => $city->id,
+                'latitude' => $data['coord']['lat'],
+                'longitude' => $data['coord']['lon'],
+                'country' => $data['sys']['country'],
+                'sunrise' => $data['sys']['sunrise'],
+                'sunset' => $data['sys']['sunset'],
+                'city' => $data['name'],
+            ]);
 
             return response()->json(['message' => 'Data saved successfully', 'data' => $data], 200);
-        } catch (\Exception $e) {
+        } catch (\Exception $e) 
+        {
+            dd($e->getMessage());
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }

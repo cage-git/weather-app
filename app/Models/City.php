@@ -16,10 +16,10 @@ class City extends Model
         'name','uid'
     ];
 
-    public function locations()
-    {
-        return $this->hasOne(Location::class);
-    }
+    // public function locations()
+    // {
+    //     return $this->hasOne(Location::class);
+    // }
 
     public function temperatures()
     {
@@ -31,8 +31,19 @@ class City extends Model
         return $this->hasOne(Atmosphere::class);
     }
 
-    public function winds()
-    {
-        return $this->hasOne(Wind::class);
-    }
+    // public function winds()
+    // {
+    //     return $this->hasOne(Wind::class);
+    // }
+
+    // app/Models/City.php
+public function locations()
+{
+    return $this->hasOne(Location::class);
+}
+
+public function winds()
+{
+    return $this->hasOne(Wind::class);
+}
 }

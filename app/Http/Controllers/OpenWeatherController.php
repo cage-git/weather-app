@@ -28,7 +28,7 @@ class OpenWeatherController extends Controller
             try {
                 $response = Http::withHeaders([
                     "x-rapidapi-host" => "open-weather13.p.rapidapi.com",
-                    "x-rapidapi-key" => "49c9a08feemshb5cc67766e0a238p1497f0jsn1a831a4d236a"
+                    "x-rapidapi-key" => env('WEATHER_API_KEY')
                 ])->get("https://open-weather13.p.rapidapi.com/city/{$city}/EN");
 
                 if ($response->failed()) {

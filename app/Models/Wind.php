@@ -9,8 +9,14 @@ class Wind extends Model
 {
     protected $table = 'winds';
 
-    protected $fillable = [ 'speed', 'deg', 'gust' ];
+    // protected $fillable = [ 'speed', 'deg', 'gust' ];
 
+    // app/Models/Wind.php
+protected $fillable = [
+    'speed',
+    'deg',
+    'gust',
+];
     public function city(){
         return $this->belongsTo(City::class);
     }
